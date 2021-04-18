@@ -7,9 +7,9 @@ public class initProject {
     public static Connection connection;
     public static Statement statement;
     public static ResultSet result;
-    public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/ptaneja";
-    public static final String user = "ptaneja";
-    public static final String password = "200371037";
+    public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/jsukhad";
+    public static final String user = "jsukhad";
+    public static final String password = "200314087";
 
     public static void connectToDatabase() {
         try {
@@ -39,8 +39,9 @@ public class initProject {
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello");
         connectToDatabase();
-        initTables.createTable();
-        initTables.addData();
+//        initTables.createTable();
+//        initTables.addData();
+        infoProcess.toUpdateStoreData();
     }
 
 }
