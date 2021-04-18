@@ -38,18 +38,21 @@ public class initTables {
                     + "PRIMARY KEY (`SupplierID`));");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Merchandise` ("
-                    + "`ProductID` varchar(20) PRIMARY KEY NOT NULL ,"
+                    + "`ProductID` varchar(20) NOT NULL ,"
+                    + "`StoreID` varchar(20) NOT NULL, "
                     + "`ProductName`  VARCHAR(50) NOT NULL, "
                     + "`ExpirationDate` DATE, "
                     + "`ProductionDate` DATE, "
-                    + "`SellPrice` INT NOT NULL);");
+                    + "`SellPrice` INT NOT NULL, "
+                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`) ,"
+                    + "PRIMARY KEY (`ProductID`, `StoreID`));");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Discount` ("
                     + "`DiscountID` varchar(20) PRIMARY KEY NOT NULL, "
                     + "`ProductID` varchar(20) NOT NULL, "
                     + "`StartDate` DATE NOT NULL, "
                     + "`EndDate` DATE NOT NULL, "
-                    + "`Amount` INT NOT NULL, "
+                    + "`Amount` FLOAT NOT NULL, "
                     + "FOREIGN KEY (`ProductID`) REFERENCES Merchandise(`ProductID`)); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Memberships` ("
@@ -57,8 +60,7 @@ public class initTables {
                     + "`Reward` FLOAT NOT NULL); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Supply` ("
-                    + "`SupplyID` varchar(20) NOT NULL,"
-                    + "`StoreAddress` VARCHAR(100) NOT NULL, "
+                    + "`SupplyID` int NOT NULL AUTO_INCREMENT,"
                     + "`SupplierID` varchar(20) NOT NULL, "
                     + "`ProductID` varchar(20) NOT NULL, "
                     + "`StoreID` varchar(20) NOT NULL,"
@@ -304,31 +306,278 @@ public class initTables {
         }
     }
 
+    public static void addMerchandiseData(String ProductID, String StoreID, String ProductName,
+                                          int SellPrice, String ProductionDate, String ExpirationDate){
+        String sqlStatement = "INSERT INTO `Merchandise` (`ProductID`, `StoreID`, `ProductName`, `SellPrice`, `ProductionDate`, `ExpirationDate`) "
+                + "VALUES (?, ?, ?, ?, ?, ?);";
 
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertMerchandiseData = initProject.connection.prepareStatement(sqlStatement);
+                insertMerchandiseData.setString(1, ProductID);
+                insertMerchandiseData.setString(2, StoreID);
+                insertMerchandiseData.setString(3, ProductName);
+                insertMerchandiseData.setInt(4, SellPrice);
+                insertMerchandiseData.setDate(5, Date.valueOf(ProductionDate));
+                insertMerchandiseData.setDate(6, Date.valueOf(ExpirationDate));
+
+                insertMerchandiseData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addSellsData(String ProductID, String StoreID, int Quantity){
+        String sqlStatement = "INSERT INTO `Sells` (`ProductID`, `StoreID`, `Quantity`) "
+                + "VALUES (?, ?, ?);";
+
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertSellsData = initProject.connection.prepareStatement(sqlStatement);
+                insertSellsData.setString(1, ProductID);
+                insertSellsData.setString(2, StoreID);
+                insertSellsData.setInt(3, Quantity);
+
+                insertSellsData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addSupplyData(String ProductID, String StoreID, String SupplierID, int BuyPrice,
+                                          int Quantity){
+        String sqlStatement = "INSERT INTO `Supply` (`SupplierID`, `ProductID`, `StoreID`,  `BuyPrice`, `Quantity`) "
+                + "VALUES (?, ?, ?, ?, ?);";
+
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertSupplyData = initProject.connection.prepareStatement(sqlStatement);
+                insertSupplyData.setString(1, SupplierID);
+                insertSupplyData.setString(2, ProductID);
+                insertSupplyData.setString(3, StoreID);
+                insertSupplyData.setInt(4, BuyPrice);
+                insertSupplyData.setInt(5, Quantity);
+
+                insertSupplyData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addSignUpData(String StoreID, int StaffID, String CustomerID, String SignUpDate){
+        String sqlStatement = "INSERT INTO `SignUp` (`StoreID`, `StaffID`, `CustomerID`,  `SignUpDate`) "
+                + "VALUES (?, ?, ?, ?);";
+
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertSignUpData = initProject.connection.prepareStatement(sqlStatement);
+                insertSignUpData.setString(1, StoreID);
+                insertSignUpData.setInt(2, StaffID);
+                insertSignUpData.setString(3, CustomerID);
+                insertSignUpData.setDate(4, Date.valueOf(SignUpDate));
+
+                insertSignUpData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addTransactionData(String TransactionID, String StoreID, String CustomerID, int CashierID,
+                                          String PurchaseDate){
+        String sqlStatement = "INSERT INTO `Transaction` (`TransactionID`, `StoreID`, `CustomerID`,  `CashierID`, `PurchaseDate`) "
+                + "VALUES (?, ?, ?, ?, ?);";
+
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertTransactionData = initProject.connection.prepareStatement(sqlStatement);
+                insertTransactionData.setString(1, TransactionID);
+                insertTransactionData.setString(2, StoreID);
+                insertTransactionData.setString(3, CustomerID);
+                insertTransactionData.setInt(4, CashierID);
+                insertTransactionData.setDate(5, Date.valueOf(PurchaseDate));
+
+                insertTransactionData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addOrdersData(String TransactionID, String ProductID, int Price, int Quantity, Float TotalPrice){
+        String sqlStatement = "INSERT INTO `Orders` (`TransactionID`, `ProductID`, `Price`,  `Quantity`, `TotalPrice`) "
+                + "VALUES (?, ?, ?, ?, ?);";
+
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertOrdersData = initProject.connection.prepareStatement(sqlStatement);
+                insertOrdersData.setString(1, TransactionID);
+                insertOrdersData.setString(2, ProductID);
+                insertOrdersData.setInt(3, Price);
+                insertOrdersData.setInt(4, Quantity);
+                insertOrdersData.setFloat(5, TotalPrice);
+
+                insertOrdersData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addDiscountData(String DiscountID, String ProductID, Float Amount, String StartDate,
+                                          String EndDate){
+        String sqlStatement = "INSERT INTO `Discount` (`DiscountID`, `ProductID`, `Amount`,  `StartDate`, `EndDate`) "
+                + "VALUES (?, ?, ?, ?, ?);";
+
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertDiscountData = initProject.connection.prepareStatement(sqlStatement);
+                insertDiscountData.setString(1, DiscountID);
+                insertDiscountData.setString(2, ProductID);
+                insertDiscountData.setFloat(3, Amount);
+                insertDiscountData.setDate(4, Date.valueOf(StartDate));
+                insertDiscountData.setDate(5, Date.valueOf(EndDate));
+
+                insertDiscountData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addInventoryDetails(String ProductID, String StoreID, String ProductName, int Quantity,
+                                           int BuyPrice, int SellPrice, String ProductionDate, String ExpirationDate,
+                                           String SupplierID){
+
+        try{
+            addMerchandiseData(ProductID, StoreID, ProductName, SellPrice, ProductionDate, ExpirationDate);
+            addSellsData(ProductID, StoreID, Quantity);
+            addSupplyData(ProductID, StoreID, SupplierID, BuyPrice, Quantity);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
     public static void addData(){
-//        addStoreData("2001", 1001, "2221, B Street, NC", "919-2222-123");
-//        addStoreData("2002", 1002, "2222, C Street, NC", "919-2222-456");
-//
-//        addStaffData(1001, "2001", "John ", 32, "1101, S Street, NC",
-//                "Manager", "919-1111-123", "john01@gmail.com", "2018-10-10");
-//        addStaffData(1002, "2002", "Alex ", 42, "1102, T Street, NC",
-//                "Manager", "919-1111-456", "alex12@gmail.com", "2015-07-19");
-//        addStaffData(1003, "2001", "Mary ", 28, "1103, U Street, NC",
-//                "cashier", "919-1111-789", "mary34@gmail.com", "2019-07-19");
+        addStoreData("2001", 1001, "2221, B Street, NC", "919-2222-123");
+        addStoreData("2002", 1002, "2222, C Street, NC", "919-2222-456");
 
-//        addSupplierData("4001", "A Food Wholesale", "919-4444-123", "afood@gmail.com",
-//                "4401, A Street, NC");
-//        addSupplierData("4002", "US Foods", "919-4444-456", "usfoods@gmail.com",
-//                "4402, G Street, NC");
+        addStaffData(1001, "2001", "John ", 32, "1101, S Street, NC",
+                    "Manager", "919-1111-123", "john01@gmail.com", "2018-10-10");
+        addStaffData(1002, "2002", "Alex ", 42, "1102, T Street, NC",
+                    "Manager", "919-1111-456", "alex12@gmail.com", "2015-07-19");
+        addStaffData(1003, "2001", "Mary ", 28, "1103, U Street, NC",
+                    "cashier", "919-1111-789", "mary34@gmail.com", "2019-07-19");
 
-//        addMembershipsData("Platinum", 2.5F);
-//        addMembershipsData("Gold", 1.0F);
+        addSupplierData("4001", "A Food Wholesale", "919-4444-123", "afood@gmail.com",
+                    "4401, A Street, NC");
+        addSupplierData("4002", "US Foods", "919-4444-456", "usfoods@gmail.com",
+                    "4402, G Street, NC");
+
+        addMembershipsData("Platinum", 2.5F);
+        addMembershipsData("Gold", 1.0F);
         addClubMemberData("5001", "James", "Smith", "Gold",
-                "919-5555-123", "True", "James5001@gmail.com", "5500, E Street, NC");
+                    "919-5555-123", "True", "James5001@gmail.com", "5500, E Street, NC");
 
         addClubMemberData("5002", "David", "Smith", "Platinum",
-                "919-5555-456", "True", "David5002@gmail.com", " 5501 F Street, NC");
+                    "919-5555-456", "True", "David5002@gmail.com", " 5501 F Street, NC");
 
+        addInventoryDetails("3001", "2001", "AAA Paper Towels", 100,
+                    10, 20, "2020-01-01", "2025-01-01", "4001");
+
+        addInventoryDetails("3002", "2001", "BBB Hand soap", 200,
+                    5, 10, "2020-01-01", "2022-01-01", "4002");
+
+        addInventoryDetails("3001", "2002", "AAA Paper Towels", 150,
+                    10, 20, "2020-01-01", "2025-01-01", "4001");
+
+
+        addInventoryDetails("3002", "2002", "BBB Hand soap", 0,
+                    5, 10, "2020-01-01", "2022-01-01", "4002");
+
+        addInventoryDetails("3003", "2001", "CCC Red Wine", 100,
+                   15, 30, "2021-01-01", "2022-01-01", "4002");
+
+        addSignUpData("2001", 1003, "5001", "2019-08-01");
+        addSignUpData("2001", 1003, "5002", "2018-01-01");
+
+        addTransactionData("6001", "2001", "5002", 1003, "2020-05-01");
+        addTransactionData("6002", "2001", "5002", 1003, "2020-06-01");
+        addTransactionData("6003", "2001", "5001", 1003, "2020-07-01");
+
+        addOrdersData("6001", "3001", 20, 5, 80F);
+        addOrdersData("6001", "3002", 10, 2, 20F);
+        addOrdersData("6002", "3002", 10, 10, 100F);
+        addOrdersData("6003", "3001", 20, 10, 160F);
+
+        addDiscountData("7001", "3001", 20F, "2020-01-01", "2021-05-01");
+        addDiscountData("7002", "3003", 20F, "2020-01-01", "2021-05-01");
 
     }
 
