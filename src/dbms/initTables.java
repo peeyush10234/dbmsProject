@@ -27,7 +27,7 @@ public class initTables {
                     + "`TimeOfEmployment` Date NOT NULL, "
                     + "`HomeAddress` varchar(50), "
                     + "PRIMARY KEY (`StaffID`), "
-                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`));");
+                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`) ON UPDATE CASCADE);");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Supplier` ("
                     + "`SupplierID` VARCHAR(20) NOT NULL, "
@@ -44,7 +44,7 @@ public class initTables {
                     + "`ExpirationDate` DATE, "
                     + "`ProductionDate` DATE, "
                     + "`SellPrice` INT NOT NULL, "
-                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`) ,"
+                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`) ON UPDATE CASCADE ,"
                     + "PRIMARY KEY (`ProductID`, `StoreID`));");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Discount` ("
@@ -53,7 +53,7 @@ public class initTables {
                     + "`StartDate` DATE NOT NULL, "
                     + "`EndDate` DATE NOT NULL, "
                     + "`Amount` FLOAT NOT NULL, "
-                    + "FOREIGN KEY (`ProductID`) REFERENCES Merchandise(`ProductID`)); ");
+                    + "FOREIGN KEY (`ProductID`) REFERENCES Merchandise(`ProductID`) ON UPDATE CASCADE); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Memberships` ("
                     + "`MembershipLevel` VARCHAR(50) NOT NULL PRIMARY KEY, "
@@ -67,9 +67,9 @@ public class initTables {
                     + "`BuyPrice` int NOT NULL, "
                     + "`Quantity` int NOT NULL, "
                     + "PRIMARY KEY (`SupplyID`), "
-                    + "FOREIGN KEY (`SupplierID`) REFERENCES Supplier(`SupplierID`),"
-                    + "FOREIGN KEY (`ProductID`) REFERENCES Merchandise(`ProductID`),"
-                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`));");
+                    + "FOREIGN KEY (`SupplierID`) REFERENCES Supplier(`SupplierID`) ON UPDATE CASCADE,"
+                    + "FOREIGN KEY (`ProductID`) REFERENCES Merchandise(`ProductID`) ON UPDATE CASCADE,"
+                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`) ON UPDATE CASCADE);");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `ClubMembers` ("
                     + "`CustomerID` varchar(20) PRIMARY KEY NOT NULL, "
@@ -80,7 +80,7 @@ public class initTables {
                     + "`MembershipLevel` VARCHAR(50) NOT NULL, "
                     + "`Email` VARCHAR(50) NOT NULL, "
                     + "`Address` VARCHAR(100) NOT NULL, "
-                    + "FOREIGN KEY (`MembershipLevel`) REFERENCES Memberships(`MembershipLevel`)); ");
+                    + "FOREIGN KEY (`MembershipLevel`) REFERENCES Memberships(`MembershipLevel`) ON UPDATE CASCADE); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Transfer` ("
                     + "`TransferID` varchar(20) PRIMARY KEY NOT NULL,"
@@ -89,10 +89,10 @@ public class initTables {
                     + "`OperatorID` int NOT NULL, "
                     + "`Quantity` INT NOT NULL, "
                     + "`ProductID` varchar(20) NOT NULL, "
-                    + "FOREIGN KEY (`SourceID`) REFERENCES `Store`(`StoreID`), "
-                    + "FOREIGN KEY (`DestinationID`) REFERENCES `Store`(`StoreID`), "
-                    + "FOREIGN KEY (`OperatorID`) REFERENCES `Staff`(`StaffID`), "
-                    + "FOREIGN KEY (`ProductID`) REFERENCES `Merchandise`(`ProductID`)); ");
+                    + "FOREIGN KEY (`SourceID`) REFERENCES `Store`(`StoreID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`DestinationID`) REFERENCES `Store`(`StoreID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`OperatorID`) REFERENCES `Staff`(`StaffID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`ProductID`) REFERENCES `Merchandise`(`ProductID`) ON UPDATE CASCADE); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Returns` ("
                     + "`ReturnID` varchar(20) PRIMARY KEY NOT NULL, "
@@ -101,24 +101,24 @@ public class initTables {
                     + "`ProductID` varchar(20) NOT NULL,"
                     + "`Quantity` INT NOT NULL, "
                     + "`OperatorID` int NOT NULL, "
-                    + "FOREIGN KEY (`SupplierID`) REFERENCES `Supply`(`SupplierID`), "
-                    + "FOREIGN KEY (`StoreID`) REFERENCES `Store`(`StoreID`), "
-                    + "FOREIGN KEY (`OperatorID`) REFERENCES `Staff`(`StaffID`), "
-                    + "FOREIGN KEY (`ProductID`) REFERENCES `Merchandise`(`ProductID`)); " );
+                    + "FOREIGN KEY (`SupplierID`) REFERENCES `Supply`(`SupplierID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`StoreID`) REFERENCES `Store`(`StoreID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`OperatorID`) REFERENCES `Staff`(`StaffID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`ProductID`) REFERENCES `Merchandise`(`ProductID`) ON UPDATE CASCADE); " );
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Sells` ("
                     + "`StoreID` varchar(20) NOT NULL, "
                     + "`ProductID` varchar(20) NOT NULL, "
                     + "`Quantity` INT NOT NULL, "
                     + "PRIMARY KEY(`StoreID`, `ProductID`), "
-                    + "FOREIGN KEY (`StoreID`) REFERENCES `Store`(`StoreID`), "
-                    + "FOREIGN KEY (`ProductID`) REFERENCES `Merchandise`(`ProductID`)); ");
+                    + "FOREIGN KEY (`StoreID`) REFERENCES `Store`(`StoreID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`ProductID`) REFERENCES `Merchandise`(`ProductID`) ON UPDATE CASCADE); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Manage` ("
                     + "`StoreID` varchar(20) PRIMARY KEY NOT NULL,"
                     + "`StaffID` int NOT NULL, "
-                    + "FOREIGN KEY (`StoreID`) REFERENCES `Store`(`StoreID`), "
-                    + "FOREIGN KEY (`StaffID`) REFERENCES `Staff`(`StaffID`)); ");
+                    + "FOREIGN KEY (`StoreID`) REFERENCES `Store`(`StoreID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`StaffID`) REFERENCES `Staff`(`StaffID`)ON UPDATE CASCADE); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Transaction` ("
                     + "`TransactionID` varchar(20) PRIMARY KEY NOT NULL,"
@@ -126,9 +126,9 @@ public class initTables {
                     + "`CustomerID` varchar(20) NOT NULL, "
                     + "`CashierID` INT NOT NULL, "
                     + "`PurchaseDate` DATE NOT NULL, "
-                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`), "
-                    + "FOREIGN KEY (`CustomerID`) REFERENCES ClubMembers(`CustomerID`), "
-                    + "FOREIGN KEY (`CashierID`) REFERENCES Staff(`StaffID`)); ");
+                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`CustomerID`) REFERENCES ClubMembers(`CustomerID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`CashierID`) REFERENCES Staff(`StaffID`) ON UPDATE CASCADE); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Orders` ("
                     + "`TransactionID` varchar(20) NOT NULL,"
@@ -137,8 +137,8 @@ public class initTables {
                     + "`Quantity` INT NOT NULL, "
                     + "`totalPrice` FLOAT NOT NULL, "
                     + "PRIMARY KEY(`TransactionID`, `ProductID`), "
-                    + "FOREIGN KEY (`TransactionID`) REFERENCES Transaction(`TransactionID`), "
-                    + "FOREIGN KEY (`ProductID`) REFERENCES Merchandise(`ProductID`)); ");
+                    + "FOREIGN KEY (`TransactionID`) REFERENCES Transaction(`TransactionID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`ProductID`) REFERENCES Merchandise(`ProductID`) ON UPDATE CASCADE); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `SignUp` ("
                     + "`StoreID` varchar(20) NOT NULL,"
@@ -146,9 +146,9 @@ public class initTables {
                     + "`CustomerID` varchar(20) NOT NULL, "
                     + "`SignUpDate` DATE NOT NULL, "
                     + "PRIMARY KEY(`CustomerID`), "
-                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`), "
-                    + "FOREIGN KEY (`CustomerID`) REFERENCES ClubMembers(`CustomerID`), "
-                    + "FOREIGN KEY (`StaffID`) REFERENCES Staff(`StaffID`)); ");
+                    + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`CustomerID`) REFERENCES ClubMembers(`CustomerID`) ON UPDATE CASCADE, "
+                    + "FOREIGN KEY (`StaffID`) REFERENCES Staff(`StaffID`) ON UPDATE CASCADE); ");
 
 
         }catch (Exception e){

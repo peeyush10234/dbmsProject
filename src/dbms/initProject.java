@@ -39,9 +39,9 @@ public class initProject {
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello");
         connectToDatabase();
-//        initTables.createTable();
-//        initTables.addData();
-        infoProcess.toUpdateStoreData();
+        initTables.createTable();
+        initTables.addData();
+//        infoProcess.toUpdateStoreData();
     }
 
 }
