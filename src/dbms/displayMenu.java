@@ -48,7 +48,26 @@ public class displayMenu {
                 break;
 
             case "Information processing":
-                System.out.println("Work in Progress");
+                System.out.println("1.1 - " + "Insert Staff");
+                System.out.println("1.2 - " + "Update Staff");
+                System.out.println("1.3 - " + "Delete Staff");
+                System.out.println("2.1 - " + "Insert Store");
+                System.out.println("2,2 - " + "Update Store");
+                System.out.println("2.3 - " + "Delete Store");
+                System.out.println("3.1 - " + "Insert Supplier");
+                System.out.println("3,2 - " + "Update Supplier");
+                System.out.println("3.3 - " + "Delete Supplier");
+                System.out.println("4.1 - " + "Insert Club Member");
+                System.out.println("4,2 - " + "Update Club Member");
+                System.out.println("4.3 - " + "Delete Club Member");
+                System.out.println("5.1 - " + "Insert Membership Level");
+                System.out.println("5,2 - " + "Update Membership Level");
+                System.out.println("5.3 - " + "Delete Membership Level");
+                System.out.println("6.1 - " + "Insert Discount");
+                System.out.println("6.2 - " + "Update Discount");
+                System.out.println("6.3 - " + "Delete Discount");
+                System.out.println("7 - " + "Main Menu");
+                System.out.println("8 - " + "Quit");
                 break;
         }
 

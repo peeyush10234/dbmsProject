@@ -228,8 +228,6 @@ public class initProject {
                                 System.out.println("Enter date2");
                                 sc = new Scanner(System.in);
                                 date2 = sc.nextLine();
-                                System.out.println("Enter StoreID");
-                                sc = new Scanner(System.in);
                                 generateReports.getPurchaseReportPeriod(date1, date2);
                                 break;
 
@@ -278,6 +276,8 @@ public class initProject {
 
                         }
                         break;
+
+
                     case "Maintaining billing and transaction records":
 
                         switch (userInput) {
@@ -311,6 +311,129 @@ public class initProject {
                                 break;
                         }
                         break;
+
+                    case "Information processing":
+
+                        switch (userInput){
+                            case "1.1":
+                                addData.addStaff();
+                                displayResults.getStaffInfo();
+                                System.out.println();
+                                break;
+
+                            case "1.2":
+                                updateProcess.toUpdateStaffData();
+                                displayResults.getStaffInfo();
+                                System.out.println();
+                                break;
+
+                            case "1.3":
+                                deleteProcess.deleteStaffInfo();
+                                displayResults.getStaffInfo();
+                                System.out.println();
+                                break;
+                            case "2.1":
+                                addData.addStore();
+                                displayResults.getStoreInfo();
+                                System.out.println();
+                                break;
+
+                            case "2.2":
+                                updateProcess.toUpdateStoreData();
+                                displayResults.getStaffInfo();
+                                System.out.println();
+                                break;
+
+                            case "2.3":
+                                deleteProcess.deleteStoreInfo();
+                                displayResults.getStoreInfo();
+                                System.out.println();
+                                break;
+
+                            case "3.1":
+                                addData.addSupplier();
+                                displayResults.getSuppliersInfo();
+                                System.out.println();
+                                break;
+
+                            case "3.2":
+                                updateProcess.toUpdateSupplierData();
+                                displayResults.getSuppliersInfo();
+                                System.out.println();
+                                break;
+
+                            case "3.3":
+                                deleteProcess.deleteSupplierInfo();
+                                displayResults.getSuppliersInfo();
+                                System.out.println();
+                                break;
+                            case "4.1":
+                                addData.addClubMember();
+                                displayTables.getClubMembersInfo();
+                                System.out.println();
+                                displayTables.getSignUpInfo();
+                                System.out.println();
+                                break;
+
+                            case "4.2":
+                                updateProcess.toUpdateClubMembersData();
+                                displayTables.getClubMembersInfo();
+                                System.out.println();
+                                break;
+
+                            case "4.3":
+                                deleteProcess.deleteClubMembersInfo();
+                                displayTables.getClubMembersInfo();
+                                System.out.println();
+                                break;
+
+                            case "5.1":
+                                addData.addMemberships();
+                                displayTables.getMembershipLevelInfo();
+                                System.out.println();
+                                break;
+
+                            case "5.2":
+                                updateProcess.toUpdateMembershipData();
+                                displayTables.getMembershipLevelInfo();
+                                System.out.println();
+                                break;
+
+                            case "5.3":
+                                deleteProcess.deleteMembershipInfo();
+                                displayTables.getMembershipLevelInfo();
+                                System.out.println();
+                                break;
+
+                            case "6.1":
+                                addData.addDiscount();
+                                displayTables.getDiscountInfo();
+                                System.out.println();
+                                break;
+
+                            case "6.2":
+                                updateProcess.toUpdateDiscountData();
+                                displayTables.getDiscountInfo();
+                                System.out.println();
+                                break;
+
+                            case "6.3":
+                                deleteProcess.deleteDiscountInfo();
+                                displayTables.getDiscountInfo();
+                                System.out.println();
+                                break;
+
+                            case "7":
+                                displayMenu.printMenu("Main Menu");
+                                currMenu = "Main Menu";
+                                break;
+
+                            case "8":
+                                quit = true;
+                                break;
+                        }
+                        break;
+
                     default:
                         break;
 
