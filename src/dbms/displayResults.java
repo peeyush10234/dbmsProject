@@ -60,6 +60,29 @@ public class displayResults {
         }
 
     }
+    public static void getSuppliersInfo(){
+
+        String sql = "SELECT * FROM `Supplier`";
+        try {
+            PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
+
+            ResultSet result = stmtGetStore.executeQuery();
+            while(result.next()){
+                String SupplierID = result.getString("SupplierID");
+                String Name = result.getString("Name");
+                String PhoneNo = result.getString("PhoneNo");
+                String EmailAddress = result.getString("EmailAddress");
+                String Location = result.getString("Location");
+                System.out.println("SupplierID: "+ SupplierID +" | Name : "+ Name +" | PhoneNo: "+  PhoneNo + " | EmailAddress : "+EmailAddress
+                        + " | Location : "+Location);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 
 
 
