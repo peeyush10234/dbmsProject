@@ -66,6 +66,8 @@ public class displayMenu {
                 System.out.println("6.1 - " + "Insert Discount");
                 System.out.println("6.2 - " + "Update Discount");
                 System.out.println("6.3 - " + "Delete Discount");
+                System.out.println("7 - " + "Main Menu");
+                System.out.println("8 - " + "Quit");
                 break;
         }
 
