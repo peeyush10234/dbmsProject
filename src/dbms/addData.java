@@ -183,4 +183,153 @@ public class addData {
         }
     }
 
+
+    public static void addSupply(){
+
+        System.out.println("Enter ProductID");
+        Scanner sc = new Scanner(System.in);
+        String pID = sc.nextLine();
+
+        System.out.println("Enter StoreID");
+        sc = new Scanner(System.in);
+        String sID = sc.nextLine();
+
+        System.out.println("Enter SupplierID");
+        sc = new Scanner(System.in);
+        String supplierID = sc.nextLine();
+
+        System.out.println("Enter BuyPrice");
+        sc = new Scanner(System.in);
+        int buyPrice = Integer.parseInt(sc.nextLine());
+        System.out.println("Enter Quantity");
+        sc = new Scanner(System.in);
+        int quantity = Integer.parseInt(sc.nextLine());
+
+        initTables.addSupplyData(pID, sID, supplierID, buyPrice, quantity);
+
+    }
+
+
+    public static void addStore(){
+        System.out.println("Enter StoreID");
+        Scanner sc = new Scanner(System.in);
+        String sID = sc.nextLine();
+
+        System.out.println("Enter ManagerID");
+        sc = new Scanner(System.in);
+        int mID = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Enter Store Address");
+        sc = new Scanner(System.in);
+        String sADD = sc.nextLine();
+
+        System.out.println("Enter Phoneno");
+        sc = new Scanner(System.in);
+        String Phoneno = sc.nextLine();
+
+
+        initTables.addStoreData(sID, mID, sADD, Phoneno);
+    }
+
+    public static void addClubMember(){
+        System.out.println("Enter CustomorID");
+        Scanner sc = new Scanner(System.in);
+        String cID = sc.nextLine();
+
+        System.out.println("Enter First Name");
+        sc = new Scanner(System.in);
+        String fname = sc.nextLine();
+
+        System.out.println("Enter Last Name");
+        sc = new Scanner(System.in);
+        String lname = sc.nextLine();
+
+        System.out.println("Enter MembershipLevel");
+        sc = new Scanner(System.in);
+        String mlevel = sc.nextLine();
+
+        System.out.println("Enter Phoneno");
+        sc = new Scanner(System.in);
+        String Phoneno = sc.nextLine();
+
+        System.out.println("Enter Active Status");
+        sc = new Scanner(System.in);
+        String activeStatus = sc.nextLine();
+
+        System.out.println("Enter Email");
+        sc = new Scanner(System.in);
+        String email = sc.nextLine();
+
+        System.out.println("Enter Address");
+        sc = new Scanner(System.in);
+        String address = sc.nextLine();
+
+        initTables.addClubMemberData(cID, fname, lname, mlevel, Phoneno, activeStatus, email, address);
+
+    }
+
+    public static void addDiscount(){
+        System.out.println("Enter DiscountId");
+        Scanner sc = new Scanner(System.in);
+        String dID = sc.nextLine();
+
+        System.out.println("Enter ProductID that you want to apply the discount on");
+        sc = new Scanner(System.in);
+        String pID = sc.nextLine();
+
+        System.out.println("Enter Amount of Discount");
+        sc = new Scanner(System.in);
+        float amount = Float.parseFloat(sc.nextLine());
+
+        System.out.println("Enter Start Date");
+        sc = new Scanner(System.in);
+        String sDate = sc.nextLine();
+
+        System.out.println("Enter End Date");
+        sc = new Scanner(System.in);
+        String eDate = sc.nextLine();
+
+        initTables.addDiscountData(dID, pID, amount, sDate, eDate);
+    }
+
+
+    public static void addMemberships(){
+        System.out.println("Enter MembershipLevel");
+        Scanner sc = new Scanner(System.in);
+        String mlevel = sc.nextLine();
+
+        System.out.println("Enter Reward");
+        sc = new Scanner(System.in);
+        float reward = Float.parseFloat(sc.nextLine());
+
+        initTables.addMembershipsData(mlevel, reward);
+    }
+
+    public static void addSignUp(){
+        System.out.println("Enter StoreID");
+        Scanner sc = new Scanner(System.in);
+        String sID = sc.nextLine();
+
+        System.out.println("Enter StaffID");
+        sc = new Scanner(System.in);
+        int staffID = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Enter CustomerID");
+        sc = new Scanner(System.in);
+        String cID = sc.nextLine();
+
+        System.out.println("Enter Sign Up Date");
+        sc = new Scanner(System.in);
+        String sdate = sc.nextLine();
+
+        try{
+            initTables.addSignUpData(sID, staffID, cID, sdate);
+            addClubMember();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 }
