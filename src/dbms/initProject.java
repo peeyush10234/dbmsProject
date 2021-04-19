@@ -16,7 +16,9 @@ public class initProject {
 //    public static final String password = "200371037";
     public static final String jdbcURL = "jdbc:mariadb://localhost:3306/ptaneja";
     public static final String user = "root";
+
     public static final String password = "Peeyush@10";
+
     public static String curr = "Main Menu";
     public static String userInput = "";
     public static boolean quit = false;
