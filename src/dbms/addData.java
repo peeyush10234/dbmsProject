@@ -231,6 +231,72 @@ public class addData {
         initTables.addStoreData(sID, mID, sADD, Phoneno);
     }
 
+    public static void addStaff(){
+        System.out.println("Enter StaffID");
+        Scanner sc = new Scanner(System.in);
+        int StaffID = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Enter StoreID");
+        sc = new Scanner(System.in);
+        String StoreID = sc.nextLine();
+
+        System.out.println("Enter Name");
+        sc = new Scanner(System.in);
+        String Name = sc.nextLine();
+
+        System.out.println("Enter Age");
+        sc = new Scanner(System.in);
+        int Age = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Enter HomeAddress");
+        sc = new Scanner(System.in);
+        String HomeAddress = sc.nextLine();
+
+
+
+        System.out.println("Enter JobTitle");
+        sc = new Scanner(System.in);
+        String JobTitle = sc.nextLine();
+
+        System.out.println("Enter Phone");
+        sc = new Scanner(System.in);
+        String Phone = sc.nextLine();
+
+        System.out.println("Enter Email");
+        sc = new Scanner(System.in);
+        String Email = sc.nextLine();
+
+        System.out.println("Enter TimeOfEmployment");
+        sc = new Scanner(System.in);
+        String TimeOfEmployment = sc.nextLine();
+
+        initTables.addStaffData(StaffID,StoreID,Name,Age,HomeAddress,JobTitle,Phone,Email,TimeOfEmployment);
+    }
+
+    public static void addSupplier(){
+        System.out.println("Enter SupplierID");
+        Scanner sc = new Scanner(System.in);
+        String SupplierID = sc.nextLine();
+
+        System.out.println("Enter Name");
+        sc = new Scanner(System.in);
+        String Name = sc.nextLine();
+
+        System.out.println("Enter PhoneNo");
+        sc = new Scanner(System.in);
+        String PhoneNo = sc.nextLine();
+
+        System.out.println("Enter EmailAddress");
+        sc = new Scanner(System.in);
+        String EmailAddress = sc.nextLine();
+
+        System.out.println("Enter Location");
+        sc = new Scanner(System.in);
+        String Location = sc.nextLine();
+
+        initTables.addSupplierData(SupplierID, Name, PhoneNo, EmailAddress, Location);
+    }
+
     public static void addClubMember(){
         System.out.println("Enter CustomorID");
         Scanner sc = new Scanner(System.in);
