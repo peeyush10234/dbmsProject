@@ -8,12 +8,16 @@ public class initProject {
     public static Connection connection;
     public static Statement statement;
     public static ResultSet result;
+
+
+
     public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/ptaneja";
     public static final String user = "ptaneja";
     public static final String password = "200371037";
     public static String curr = "Main Menu";
     public static String userInput = "";
     public static boolean quit = false;
+
     public static void connectToDatabase() {
         try {
             // Loading the driver. This creates an instance of the driver
@@ -42,6 +46,8 @@ public class initProject {
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello");
         connectToDatabase();
+
+
         addData.addInventory();
 //        initTables.createTable();
 //        initTables.addData();
@@ -214,6 +220,7 @@ public class initProject {
             }
         }
     }
+
 
 }
 
