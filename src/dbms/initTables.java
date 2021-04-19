@@ -83,7 +83,7 @@ public class initTables {
                     + "FOREIGN KEY (`MembershipLevel`) REFERENCES Memberships(`MembershipLevel`) ON UPDATE CASCADE  ON DELETE SET NULL); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Transfer` ("
-                    + "`TransferID` varchar(20) PRIMARY KEY NOT NULL,"
+                    + "`TransferID` varchar(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,"
                     + "`SourceID` varchar(20) NOT NULL, "
                     + "`DestinationID` varchar(20) NOT NULL, "
                     + "`OperatorID` int NOT NULL, "
@@ -496,6 +496,38 @@ public class initTables {
                 insertDiscountData.setFloat(3, Amount);
                 insertDiscountData.setDate(4, Date.valueOf(StartDate));
                 insertDiscountData.setDate(5, Date.valueOf(EndDate));
+
+                insertDiscountData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addTransferData(String TransferID, String SourceID, String DestinationID, int OperatorID,
+                                       int Quantity, String ProductID){
+        String sqlStatement = "INSERT INTO `Transfer` (`TransferID`, `SourceID`, `DestinationID`,  `OperatorID`, `Quantity`, `ProductID`) "
+                + "VALUES (?, ?, ?, ?, ?, ?);";
+
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertDiscountData = initProject.connection.prepareStatement(sqlStatement);
+                insertDiscountData.setString(1, TransferID);
+                insertDiscountData.setString(2, SourceID);
+                insertDiscountData.setString(3, DestinationID);
+                insertDiscountData.setInt(4,OperatorID);
+                insertDiscountData.setInt(5, Quantity);
+                insertDiscountData.setString(6, ProductID);
+
 
                 insertDiscountData.executeUpdate();
                 initProject.connection.commit();

@@ -113,8 +113,74 @@ public class addData {
         initTables.addInventoryDetails(pID, sID, pName, quantity, buyPrice, sellPrice, productionDate, expirationDate, supplierID);
     }
 
-    public static void main(String[] args){
-//        int s  = billingRecords.getProductPrice("3001", "2001");
-        addTransaction();
+    public static void addTransfers(){
+        System.out.println("Enter the source StoreID");
+        Scanner sc = new Scanner(System.in);
+        String sourceStoreID = sc.nextLine();
+
+        System.out.println("Enter the destination StoreID");
+        sc = new Scanner(System.in);
+        String destinationStoreID = sc.nextLine();
+
+        System.out.println("Enter ProductID");
+        sc = new Scanner(System.in);
+        String pID= sc.nextLine();
+
+        System.out.println("Enter the transfer Quantity");
+        sc = new Scanner(System.in);
+        int quantity = sc.nextInt();
+
+        System.out.println("Enter Operator ID");
+        sc = new Scanner(System.in);
+        int oID = sc.nextInt();
+
+        if(billingRecords.isTransferPossible(sourceStoreID, pID, quantity) == false){
+            System.out.println("Transfer Not Possible - Insufficient Quantity");
+            return;
+        }
+
+        try {
+            updateProcess.updateTransfer(pID, sourceStoreID, destinationStoreID, quantity);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        initTables.addTransferData("7000", sourceStoreID, destinationStoreID, oID, quantity, pID);
     }
+
+    public static void addReturn(){
+
+        System.out.println("Enter Transaction ID");
+        Scanner sc = new Scanner(System.in);
+        String tID = sc.nextLine();
+
+        System.out.println("Enter Product ID");
+        sc = new Scanner(System.in);
+        String pID = sc.nextLine();
+
+        System.out.println("Enter Return Quantity");
+        sc = new Scanner(System.in);
+        int quantity = sc.nextInt();
+
+        try{
+            Float discount = billingRecords.getDiscount(pID);
+            if (discount == -1F)
+                discount = 0F;
+
+            updateProcess.updateOrders(tID, pID, quantity, (float) (discount/100.0));
+        } catch(Exception e){
+            System.out.println("Transaction Update Failed");
+            e.printStackTrace();
+            return;
+        }
+
+        try{
+            String storeID = billingRecords.getStoreIDFromTransactionID(tID);
+            updateProcess.updateSells(pID, storeID, quantity);
+        } catch (Exception e){
+            System.out.println("Transaction Update Failed");
+            e.printStackTrace();
+        }
+    }
+
 }

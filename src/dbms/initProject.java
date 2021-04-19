@@ -47,11 +47,6 @@ public class initProject {
         System.out.println("Hello");
         connectToDatabase();
 
-
-        addData.addInventory();
-//        initTables.createTable();
-//        initTables.addData();
-        // generateReports.testQueriesReport();
         String currMenu  = "Main Menu";
 
         displayMenu.printMenu(currMenu);
@@ -63,17 +58,17 @@ public class initProject {
                 case "Main Menu":
                     switch(userInput){
                         case "1":
-                            displayMenu.printMenu("");
-                            currMenu = "";
+                            displayMenu.printMenu("Information processing");
+                            currMenu = "Information processing";
                             break;
                         case "2":
-                            displayMenu.printMenu("2");
-                            currMenu = "1";
+                            displayMenu.printMenu("Maintaining inventory records");
+                            currMenu = "Maintaining inventory records";
                             break;
 
                         case "3":
-                            displayMenu.printMenu("3");
-                            currMenu = "3";
+                            displayMenu.printMenu("Maintaining billing and transaction records");
+                            currMenu = "Maintaining billing and transaction records";
                             break;
 
                         case "4":
@@ -89,10 +84,10 @@ public class initProject {
                             displayMenu.printMenu("Main Menu");
                             break;
                     }
-
+                    break;
                 case "Reports":
-                    System.out.println("Enter Required Option");
-                    userInput = scanner.nextLine();
+//                    System.out.println("Enter Required OptionL");
+//                    userInput = scanner.nextLine();
                     switch(userInput){
                         case "1":
                             System.out.println("Enter the Year");
@@ -156,12 +151,14 @@ public class initProject {
 
                         case "7":
                             generateReports.merchandiseReport();
+                            break;
 
                         case "8":
                             System.out.println("Enter ProductID");
                             sc = new Scanner(System.in);
                             String productID = sc.nextLine();
                             generateReports.merchandiseReportProduct(productID);
+                            break;
 
                         case "9":
                             System.out.println("Enter the Year");
@@ -209,15 +206,82 @@ public class initProject {
                             System.out.println("Enter date2");
                             sc = new Scanner(System.in);
                             date2 = sc.nextLine();
-                            System.out.println("Enter StoreID");
-                            sc = new Scanner(System.in);
                             System.out.println("Enter CustomerID");
                             sc = new Scanner(System.in);
                             String customerID = sc.nextLine();
                             generateReports.getCustomerPurchaseReportPeriod(customerID, date1, date2);
                             break;
+
+                        case "14":
+                            displayMenu.printMenu("Main Menu");
+                            currMenu = "Main Menu";
+                            break;
+
+                        case "15":
+                            quit = true;
+                            break;
                     }
+                    break;
+                case "Maintaining inventory records":
+
+                    switch (userInput){
+                        case "1":
+                            addData.addInventory();
+                            // Display all three tables
+                        case "2":
+                            addData.addReturn();
+                            // Display the two tables involved
+                        case "3":
+                            addData.addTransfers();
+                            // Display the tables involved
+                        case "4":
+                            displayMenu.printMenu("Main Menu");
+                            currMenu = "Main Menu";
+                            break;
+                        case "5":
+                            quit = true;
+                            break;
+
+                    }
+                    break;
+                case "Maintaining billing and transaction records":
+
+                    switch (userInput){
+                        case "1":
+                            System.out.println("Enter Supplier ID");
+                            Scanner sa = new Scanner(System.in);
+                            String SupplierID = sa.nextLine();
+                            billingRecords.generateSupplierBill(SupplierID);
+                            break;
+
+                        case "2":
+                            billingRecords.generateAllSuppliersBill();
+                            break;
+
+                        case "3":
+                            System.out.println("Enter the Year for Rewards needs to be calculated");
+                            Scanner sf = new Scanner(System.in);
+                            String Year = sf.nextLine();
+                            billingRecords.generatePlatinumCustomersYearlyReward(Year);
+                            break;
+                        case "4":
+                            addData.addTransaction();
+
+                        case "5":
+                            displayMenu.printMenu("Main Menu");
+                            currMenu = "Main Menu";
+                            break;
+
+                        case "6":
+                            quit = true;
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+
             }
+
         }
     }
 

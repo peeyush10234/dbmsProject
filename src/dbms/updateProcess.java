@@ -1056,9 +1056,96 @@ public class updateProcess {
 
     }
 
+    public static void updateTransfer(String productID, String sourceStoreID, String destStoreID, int quantity){
+        try{
+            initProject.connection.setAutoCommit(false);
+            try{
+                String sqlStatement = "UPDATE Sells SET Quantity = Quantity - ? WHERE ProductID = ? and StoreID  = ?;";
+                String sqlStatement2 = "UPDATE Sells SET Quantity = Quantity + ? WHERE ProductID = ? and StoreID  = ?;";
+
+                PreparedStatement updateSellsSource = initProject.connection.prepareStatement(sqlStatement);
+                PreparedStatement updateSellsDestination = initProject.connection.prepareStatement(sqlStatement2);
+
+                updateSellsSource.setInt(1, quantity);
+                updateSellsSource.setString(2, productID);
+                updateSellsSource.setString(3, sourceStoreID);
+
+                updateSellsDestination.setInt(1, quantity);
+                updateSellsDestination.setString(2, productID);
+                updateSellsDestination.setString(3, destStoreID);
+
+                updateSellsSource.executeUpdate();
+                updateSellsDestination.executeUpdate();
+
+                initProject.connection.commit();
+                System.out.println("Transfer operation Successfull");
+
+            } catch(SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException e){
+                e.printStackTrace();
+        }
+    }
+
+    public static void updateOrders(String TransactionID, String ProductID, int quantity, Float Discount){
+        try{
+            initProject.connection.setAutoCommit(false);
+            try{
+                String sqlStatement = "UPDATE Orders SET Quantity = Quantity - ? , TotalPrice = TotalPrice - quantity*Price*(1.0 - ?) WHERE ProductID = ? and TransactionID  = ?;";
+
+                PreparedStatement updateTrans = initProject.connection.prepareStatement(sqlStatement);
+                updateTrans.setInt(1, quantity);
+                updateTrans.setFloat(2, Discount);
+                updateTrans.setString(3, ProductID);
+                updateTrans.setString(4, TransactionID);
+
+                updateTrans.executeUpdate();
+                initProject.connection.commit();
+                System.out.println("Transaction Table Changed Successfully");
+
+            } catch(SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch(SQLException e1){
+            e1.printStackTrace();
+        }
+    }
+
+    public static void updateSells(String ProductID, String StoreID, int quantity){
+        try{
+            initProject.connection.setAutoCommit(false);
+            try{
+                String sqlStatement = "UPDATE Sells SET Quantity = Quantity + ? WHERE ProductID = ? and StoreID  = ?;";
 
 
+                PreparedStatement updateSells = initProject.connection.prepareStatement(sqlStatement);
 
 
+                updateSells.setInt(1, quantity);
+                updateSells.setString(2, ProductID);
+                updateSells.setString(3, StoreID);
+
+                updateSells.executeUpdate();
+
+                initProject.connection.commit();
+                System.out.println("Inventory For Returned Product Changes Successfully");
+
+            } catch(SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
 }

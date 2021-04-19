@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class billingRecords {
 
     public static void generateSupplierBill(String supplierID){
-        String sqlStatement = "SELECT SupplierID, SUM(BuyPrice*Quantity) AS Bill FROM Supply WHERE SUPPLIERID = ?;";
+        String sqlStatement = "SELECT SupplierID, SUM(BuyPrice*Quantity) AS Bill FROM Supply WHERE SupplierID = ?;";
 
         try{
             PreparedStatement supplierBill = initProject.connection.prepareStatement(sqlStatement);
@@ -30,7 +30,7 @@ public class billingRecords {
     }
 
     public static void generateAllSuppliersBill(){
-        String sqlStatement = "SELECT SupplierID, SUM(BuyPrice*Quantity) AS Bill FROM Supply WHERE SUPPLIERID = ?;";
+        String sqlStatement = "SELECT SupplierID, SUM(BuyPrice*Quantity) AS Bill FROM Supply GROUP BY SupplierID;";
 
         try{
             PreparedStatement supplierBill = initProject.connection.prepareStatement(sqlStatement);
@@ -51,12 +51,12 @@ public class billingRecords {
         }
     }
 
-    public void generateCustomersYearlyReward(String year){
+    public static void generateCustomersYearlyReward(String year){
         String date1 = year + "-01-01";
         String date2 = year + "-12-31";
 
-        String sqlStatement = "SELECT t.CustomerID, SUM(o.TotalPrice*0.01*m.Reward) AS TotalReward FROM ClubMembers c"
-                + "Transaction t, Orders o, Memberships m WHERE c.CustomerID = t.CustomerID AND c.MembershipLevel = m.MembershipLevel" +
+        String sqlStatement = "SELECT t.CustomerID, SUM(o.TotalPrice*0.01*m.Reward) AS TotalReward FROM ClubMembers c, "
+                + "Transaction t, Orders o, Memberships m WHERE c.CustomerID = t.CustomerID AND c.MembershipLevel = m.MembershipLevel " +
                 "AND o.TransactionID = t.TransactionID AND t.PurchaseDate BETWEEN ? AND ? Group By t.CustomerID;";
 
         try{
@@ -79,18 +79,19 @@ public class billingRecords {
         }
     }
 
-    public void generatePlatinumCustomersYearlyReward(String year){
+    public static void generatePlatinumCustomersYearlyReward(String year){
         String date1 = year + "-01-01";
         String date2 = year + "-12-31";
 
-        String sqlStatement = "SELECT t.CustomerID, SUM(o.TotalPrice*0.01*m.Reward) AS TotalReward FROM ClubMembers c"
-                + "Transaction t, Orders o, Memberships m WHERE c.CustomerID = t.CustomerID AND c.MembershipLevel = m.MembershipLevel" +
-                "AND o.TransactionID = t.TransactionID AND t.PurchaseDate BETWEEN ? AND ?  AND m.MembershipLevel = Platinum Group By t.CustomerID;";
+        String sqlStatement = "SELECT t.CustomerID, SUM(o.TotalPrice*0.01*m.Reward) AS TotalReward FROM ClubMembers c, "
+                + "Transaction t, Orders o, Memberships m WHERE c.CustomerID = t.CustomerID AND c.MembershipLevel = m.MembershipLevel " +
+                "AND o.TransactionID = t.TransactionID AND t.PurchaseDate BETWEEN ? AND ?  AND m.MembershipLevel = ? Group By t.CustomerID;";
 
         try{
             PreparedStatement customerReward = initProject.connection.prepareStatement(sqlStatement);
             customerReward.setString(1, date1);
             customerReward.setString(2, date2);
+            customerReward.setString(3, "Platinum");
             ResultSet rs = customerReward.executeQuery();
             rs.beforeFirst();
 
@@ -152,6 +153,57 @@ public class billingRecords {
 
         }
         return -1F;
+    }
+
+    public static boolean isTransferPossible(String storeID, String productID, int tQuan){
+
+        String sqlStatement = "SELECT Quantity FROM Sells Where ProductID = ? AND StoreID = ?;";
+        try{
+            PreparedStatement customerReward = initProject.connection.prepareStatement(sqlStatement);
+            customerReward.setString(1, productID);
+            customerReward.setString(2, storeID);
+
+            ResultSet rs = customerReward.executeQuery();
+            rs.beforeFirst();
+
+            if(!rs.isBeforeFirst()){
+                return false;
+            }
+            while(rs.next()){
+
+                int quant = rs.getInt("Quantity");
+
+                if(quant>=tQuan)
+                    return true;
+                else
+                    return false;
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+
+        }
+        return false;
+    }
+
+    public static String getStoreIDFromTransactionID(String TransactionID){
+        String sqlStatement = "SELECT StoreID FROM Transaction WHERE TransactionID = ?;";
+        try{
+            PreparedStatement customerReward = initProject.connection.prepareStatement(sqlStatement);
+            customerReward.setString(1, TransactionID);
+
+            ResultSet rs = customerReward.executeQuery();
+            rs.beforeFirst();
+
+            while(rs.next()){
+                return rs.getString("StoreID");
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+
+        }
+        return "";
     }
 
 }
