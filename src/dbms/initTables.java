@@ -94,18 +94,6 @@ public class initTables {
                     + "FOREIGN KEY (`OperatorID`) REFERENCES `Staff`(`StaffID`) ON UPDATE CASCADE  ON DELETE CASCADE, "
                     + "FOREIGN KEY (`ProductID`) REFERENCES `Merchandise`(`ProductID`) ON UPDATE CASCADE  ON DELETE CASCADE); ");
 
-            initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Returns` ("
-                    + "`ReturnID` varchar(20) PRIMARY KEY NOT NULL, "
-                    + "`SupplierID` varchar(20) NOT NULL, "
-                    + "`StoreID` varchar(20) NOT NULL, "
-                    + "`ProductID` varchar(20) NOT NULL,"
-                    + "`Quantity` INT NOT NULL, "
-                    + "`OperatorID` int NOT NULL, "
-                    + "FOREIGN KEY (`SupplierID`) REFERENCES `Supply`(`SupplierID`) ON UPDATE CASCADE  ON DELETE CASCADE, "
-                    + "FOREIGN KEY (`StoreID`) REFERENCES `Store`(`StoreID`) ON UPDATE CASCADE  ON DELETE CASCADE, "
-                    + "FOREIGN KEY (`OperatorID`) REFERENCES `Staff`(`StaffID`) ON UPDATE CASCADE  ON DELETE CASCADE, "
-                    + "FOREIGN KEY (`ProductID`) REFERENCES `Merchandise`(`ProductID`) ON UPDATE CASCADE  ON DELETE CASCADE); " );
-
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Sells` ("
                     + "`StoreID` varchar(20) NOT NULL, "
                     + "`ProductID` varchar(20) NOT NULL, "
@@ -149,6 +137,14 @@ public class initTables {
                     + "FOREIGN KEY (`StoreID`) REFERENCES Store(`StoreID`) ON UPDATE CASCADE  ON DELETE CASCADE, "
                     + "FOREIGN KEY (`CustomerID`) REFERENCES ClubMembers(`CustomerID`) ON UPDATE CASCADE  ON DELETE CASCADE, "
                     + "FOREIGN KEY (`StaffID`) REFERENCES Staff(`StaffID`) ON UPDATE CASCADE  ON DELETE CASCADE); ");
+
+            initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Returns` ("
+                    + "`TransactionID` varchar(20) NOT NULL,"
+                    + "`ProductID` varchar(20) NOT NULL, "
+                    + "`Quantity` INT NOT NULL, "
+                    + "PRIMARY KEY(`TransactionID`, `ProductID`), "
+                    + "FOREIGN KEY (`TransactionID`) REFERENCES Transaction(`TransactionID`) ON UPDATE CASCADE  ON DELETE CASCADE, "
+                    + "FOREIGN KEY (`ProductID`) REFERENCES Merchandise(`ProductID`) ON UPDATE CASCADE  ON DELETE CASCADE); ");
 
 
         }catch (Exception e){
@@ -526,6 +522,34 @@ public class initTables {
                 insertDiscountData.setInt(3,OperatorID);
                 insertDiscountData.setInt(4, Quantity);
                 insertDiscountData.setString(5, ProductID);
+
+
+                insertDiscountData.executeUpdate();
+                initProject.connection.commit();
+
+            } catch (SQLException e){
+                initProject.connection.rollback();
+                e.printStackTrace();
+            } finally {
+                initProject.connection.setAutoCommit(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addReturnsData(String TransactionID, String ProductID,int Quantity){
+        String sqlStatement = "INSERT INTO `Returns` (`TransactionID`,  `ProductID`, `Quantity`) "
+                + "VALUES (?, ?, ?);";
+
+        try{
+            initProject.connection.setAutoCommit(false);
+
+            try{
+                PreparedStatement insertDiscountData = initProject.connection.prepareStatement(sqlStatement);
+                insertDiscountData.setString(1, TransactionID);
+                insertDiscountData.setString(2, ProductID);
+                insertDiscountData.setInt(3, Quantity);
 
 
                 insertDiscountData.executeUpdate();

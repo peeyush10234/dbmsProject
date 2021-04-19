@@ -78,8 +78,8 @@ public class initProject {
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello");
         connectToDatabase();
-//        initTables.createTable();
-//        initTables.addData();
+        initTables.createTable();
+        initTables.addData();
         String currMenu  = "Main Menu";
 
         displayMenu.printMenu(currMenu);
@@ -259,12 +259,30 @@ public class initProject {
                         switch (userInput) {
                             case "1":
                                 addData.addInventory();
-                                // Display all three tables
+                                displayResults.getMerchandiseInfo();
+                                System.out.println("");
+                                displayResults.getSellsInfo();
+                                System.out.println("");
+                                displayResults.getSuppliersInfo();
+                                System.out.println("");
+                                break;
                             case "2":
                                 addData.addReturn();
                                 // Display the two tables involved
+                                displayResults.getOrdersInfo();
+                                System.out.println("");
+                                displayResults.getSellsInfo();
+                                System.out.println("");
+                                displayResults.getReturnsInfo();
+                                System.out.println("");
+                                break;
                             case "3":
                                 addData.addTransfers();
+                                displayResults.getTransferInfo();
+                                System.out.println("");
+                                displayResults.getSellsInfo();
+                                System.out.println("");
+                                break;
                                 // Display the tables involved
                             case "4":
                                 displayMenu.printMenu("Main Menu");
@@ -300,7 +318,11 @@ public class initProject {
                                 break;
                             case "4":
                                 addData.addTransaction();
-
+                                System.out.println("");
+                                displayResults.getTransactionInfo();
+                                System.out.println("");
+                                displayResults.getOrdersInfo();
+                                break;
                             case "5":
                                 displayMenu.printMenu("Main Menu");
                                 currMenu = "Main Menu";

@@ -244,8 +244,29 @@ public class displayResults {
     }
 
     public static void getReturnsInfo(){
+        String sql = "SELECT * FROM `Returns`";
+        try {
+            PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
 
-        // Todo
+            ResultSet result = stmtGetStore.executeQuery();
+            result.beforeFirst();
+
+            if(!result.isBeforeFirst()){
+                System.out.println("No Record Found");
+            }
+
+            while(result.next()){
+                int TransactionID = result.getInt("TransactionID");
+                String ProductID = result.getString("ProductID");
+                int Quantity = result.getInt("Quantity");
+
+
+                System.out.println("TransactionID: "+ TransactionID +" | ProductID : "+ ProductID +" | Quantity : "+  Quantity );
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 

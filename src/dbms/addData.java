@@ -181,6 +181,12 @@ public class addData {
             System.out.println("Transaction Update Failed");
             e.printStackTrace();
         }
+
+        try{
+            initTables.addReturnsData(tID, pID, quantity);
+        } catch (Exception e){
+            System.out.println("Return Update Failed");
+        }
     }
 
 
