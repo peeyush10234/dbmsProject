@@ -11,9 +11,9 @@ public class initProject {
 
 
 
-    public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/ptaneja";
-    public static final String user = "ptaneja";
-    public static final String password = "200371037";
+    public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/jsukhad";
+    public static final String user = "jsukhad";
+    public static final String password = "200314087";
     public static String curr = "Main Menu";
     public static String userInput = "";
     public static boolean quit = false;
