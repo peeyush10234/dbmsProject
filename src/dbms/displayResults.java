@@ -13,7 +13,8 @@ public class displayResults {
             PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
 
             ResultSet result = stmtGetStore.executeQuery();
-            if(result.next()){
+            result.beforeFirst();
+            while(result.next()){
                 String storeID = result.getString("StoreID");
                 String storeAddress = result.getString("StoreAddress");
                 String PhoneNo = result.getString("PhoneNo");
@@ -22,9 +23,7 @@ public class displayResults {
                 System.out.println("Store ID: "+ storeID +" | StoreAddress : "+ storeAddress +" | Phone No: "+  PhoneNo + " | ManagerId : "+managerId);
 
             }
-            else{
-                System.out.println(("Store ID does not exist. Please check and try again"));
-            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -38,7 +37,9 @@ public class displayResults {
             PreparedStatement stmtGetStaff = initProject.connection.prepareStatement(sql);
 
             ResultSet result = stmtGetStaff.executeQuery();
-            if (result.next()) {
+            result.beforeFirst();
+
+            while (result.next()) {
                 int staffID = result.getInt("StaffID");
                 String Name = result.getString("Name");
                 int Age = result.getInt("Age");
@@ -53,8 +54,6 @@ public class displayResults {
                         + "\n\n" + " | JobTitle : " + JobTitle + " | Phone : " + Phone + " | Email : " + Email + " | Time of Employment  : " + TimeOfEmployment
                         + " | Home Address : " + HomeAddress);
 
-            } else {
-                System.out.println(("Staff ID does not exist. Please check and try again"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -94,7 +93,9 @@ public class displayResults {
             PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
 
             ResultSet result = stmtGetStore.executeQuery();
-            if(result.next()){
+            result.beforeFirst();
+
+            while(result.next()){
                 String productID  = result.getString("ProductID");
                 String storeID = result.getString("StoreID");
                 String productName = result.getString("productName");
@@ -104,9 +105,30 @@ public class displayResults {
                 System.out.println("ProductID: "+ productID +" | StoreID : "+ storeID +" | productName: "+  productName + " | ProductionDate : "+ ProductionDate +" | ExpirationDate: " + ExpirationDate + " | SellPrice" + SellPrice);
 
             }
-            else{
-                System.out.println(("Store ID does not exist. Please check and try again"));
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    public static void getSellsInfo(){
+
+        String sql = "SELECT * FROM `Sells`";
+        try {
+            PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
+
+            ResultSet result = stmtGetStore.executeQuery();
+            result.beforeFirst();
+
+            while(result.next()){
+                String ProductID = result.getString("ProductID");
+                String StoreID = result.getString("StoreID");
+                int Quantity = result.getInt("Quantity");
+                System.out.println(" ProductID | : "+  ProductID + " | StoreID : "+ StoreID + " | Quantity: " + Quantity );
+
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -120,7 +142,9 @@ public class displayResults {
             PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
 
             ResultSet result = stmtGetStore.executeQuery();
-            if(result.next()){
+            result.beforeFirst();
+
+            while(result.next()){
                 String SupplyID  = result.getString("SupplyID");
                 String SupplierID = result.getString("SupplierID");
                 String ProductID = result.getString("ProductID");
@@ -130,9 +154,7 @@ public class displayResults {
                 System.out.println("SupplyID: "+ SupplyID +" | SupplierID : "+ SupplierID +" ProductID | : "+  ProductID + " | StoreID : "+ StoreID + " | BuyPrice: " + BuyPrice + " | Quantity" + Quantity);
 
             }
-            else{
-                System.out.println(("Store ID does not exist. Please check and try again"));
-            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -146,7 +168,9 @@ public class displayResults {
             PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
 
             ResultSet result = stmtGetStore.executeQuery();
-            if(result.next()){
+            result.beforeFirst();
+
+            while(result.next()){
                 String TransactionID = result.getString("TransactionID");
                 String StoreID = result.getString("StoreID");
                 String CustomerID = result.getString("CustomerID");
@@ -156,9 +180,6 @@ public class displayResults {
 
                 System.out.println("TransactionID: "+ TransactionID +" | StoreID : "+ StoreID +" | CustomerID: "+  CustomerID + " | CashierID : " + CashierID + " | PurchaseDate : " + PurchaseDate);
 
-            }
-            else{
-                System.out.println(("Store ID does not exist. Please check and try again"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -173,24 +194,58 @@ public class displayResults {
             PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
 
             ResultSet result = stmtGetStore.executeQuery();
-            if(result.next()){
+            result.beforeFirst();
+
+            while(result.next()){
                 String TransactionID = result.getString("TransactionID");
                 String ProductID = result.getString("ProductID");
                 int Price = result.getInt("Price");
                 int Quantity = result.getInt("Quantity");
                 float TotalPrice = result.getFloat("TotalPrice");
 
-
-
                 System.out.println("TransactionID: "+ TransactionID +" | ProductID : "+ ProductID +" | Price: "+  Price + " | Quantity : " + Quantity + " | TotalPrice : " + TotalPrice);
 
-            }
-            else{
-                System.out.println(("Store ID does not exist. Please check and try again"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+    }
+
+    public static void getTransferInfo(){
+
+        String sql = "SELECT * FROM `Transfer`";
+        try {
+            PreparedStatement stmtGetStore = initProject.connection.prepareStatement(sql);
+
+            ResultSet result = stmtGetStore.executeQuery();
+            result.beforeFirst();
+
+            if(!result.isBeforeFirst()){
+                System.out.println("No Record Found");
+            }
+
+            while(result.next()){
+                int TransferID = result.getInt("TransferID");
+                String SourceID = result.getString("SourceID");
+                String DestinationID = result.getString("DestinationID");
+                int OperatorID = result.getInt("OperatorID");
+                int Quantity = result.getInt("Quantity");
+                int ProductID = result.getInt("ProductID");
+
+
+                System.out.println("TransferID: "+ TransferID +" | SourceID : "+ SourceID +" | DestinationID : "+  DestinationID + " | OperatorID : " + OperatorID + " | Quantity : " + Quantity + " | ProductID :" + ProductID);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    public static void getReturnsInfo(){
+
+        // Todo
 
     }
 
