@@ -118,7 +118,7 @@ public class updateProcess {
 
     //OPERATIONS RELATED TO STAFF TABLE###########################################
 
-    public static void getStaffInfo(String staffID){
+    public static boolean getStaffInfo(String staffID){
 
         String sql = "SELECT * FROM `Staff`" + " WHERE StaffID = ?;";
         try {
@@ -142,9 +142,12 @@ public class updateProcess {
             }
             else{
                 System.out.println(("Staff ID does not exist. Please check and try again"));
+                return false;
             }
+            return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         }
 
     }
@@ -158,14 +161,16 @@ public class updateProcess {
             StaffID = sc.nextLine();
 
             System.out.println("\n The Staff information that you have chosen is as follows: \n");;
-            getStaffInfo(StaffID);
+            if(getStaffInfo(StaffID)){
+                System.out.println((" \n Select the attribute you want to update [staffID, Name, Age, StoreID, JobTitle, Phone, Email, TimeOfEmployment, HomeAddress]"));
+                attributeToChange = sc.nextLine();
 
-            System.out.println((" \n Select the attribute you want to update [staffID, Name, Age, StoreID, JobTitle, Phone, Email, TimeOfEmployment, HomeAddress]"));
-            attributeToChange = sc.nextLine();
+                System.out.println("Enter the new value");
+                newValue = sc.nextLine();
+                updateStaffData(StaffID, attributeToChange, newValue);
+            };
 
-            System.out.println("Enter the new value");
-            newValue = sc.nextLine();
-            updateStaffData(StaffID, attributeToChange, newValue);
+
 
         }
         catch (Exception e){

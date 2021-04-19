@@ -14,10 +14,10 @@ public class initProject {
 //    public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/ptaneja";
 //    public static final String user = "ptaneja";
 //    public static final String password = "200371037";
-    public static final String jdbcURL = "jdbc:mariadb://localhost:3306/ptaneja";
+    public static final String jdbcURL = "jdbc:mariadb://localhost:3310/jsukhad";
     public static final String user = "root";
 
-    public static final String password = "Peeyush@10";
+    public static final String password = "1234";
 
     public static String curr = "Main Menu";
     public static String userInput = "";
@@ -78,8 +78,8 @@ public class initProject {
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello");
         connectToDatabase();
-//        initTables.createTable();
-//        initTables.addData();
+        initTables.createTable();
+        initTables.addData();
         String currMenu  = "Main Menu";
 
         displayMenu.printMenu(currMenu);
@@ -260,12 +260,15 @@ public class initProject {
                             case "1":
                                 addData.addInventory();
                                 // Display all three tables
+                                break;
                             case "2":
                                 addData.addReturn();
                                 // Display the two tables involved
+                                break;
                             case "3":
                                 addData.addTransfers();
                                 // Display the tables involved
+                                break;
                             case "4":
                                 displayMenu.printMenu("Main Menu");
                                 currMenu = "Main Menu";
@@ -340,7 +343,7 @@ public class initProject {
 
                             case "2.2":
                                 updateProcess.toUpdateStoreData();
-                                displayResults.getStaffInfo();
+                                displayResults.getStoreInfo();
                                 System.out.println();
                                 break;
 
