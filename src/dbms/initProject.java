@@ -14,10 +14,10 @@ public class initProject {
 //    public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/ptaneja";
 //    public static final String user = "ptaneja";
 //    public static final String password = "200371037";
-    public static final String jdbcURL = "jdbc:mariadb://localhost:3306/ptaneja";
+    public static final String jdbcURL = "jdbc:mariadb://localhost:3310/jsukhad";
     public static final String user = "root";
 
-    public static final String password = "Peeyush@10";
+    public static final String password = "1234";
 
     public static String curr = "Main Menu";
     public static String userInput = "";
@@ -283,7 +283,7 @@ public class initProject {
                                 displayResults.getSellsInfo();
                                 System.out.println("");
                                 break;
-                                // Display the tables involved
+                                // Display the tables involve
                             case "4":
                                 displayMenu.printMenu("Main Menu");
                                 currMenu = "Main Menu";
@@ -362,7 +362,7 @@ public class initProject {
 
                             case "2.2":
                                 updateProcess.toUpdateStoreData();
-                                displayResults.getStaffInfo();
+                                displayResults.getStoreInfo();
                                 System.out.println();
                                 break;
 

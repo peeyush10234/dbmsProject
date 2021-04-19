@@ -25,7 +25,7 @@ public class displayMenu {
                 System.out.println("10 - " + "Get Customers Monthly Growth Report");
                 System.out.println("11 - " + "Get Customers Growth Report For a given period");
                 System.out.println("12 - " + "Get All Customer Purchase History for a given period");
-                System.out.println("13 - " + "Get Purchase History for a specific Customer");
+                System.out.println("13 - " + "Get Purchase History for a specific Customer for a given period");
                 System.out.println("14 - " + "Main Menu");
                 System.out.println("15 - " + "Quit");
                 break;
