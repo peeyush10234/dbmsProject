@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import  java.sql.Date;
 import java.sql.PreparedStatement;
-public class infoProcess {
+public class updateProcess {
     public static Scanner sc = new Scanner(System.in);
 
 

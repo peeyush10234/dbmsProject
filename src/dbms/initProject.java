@@ -41,8 +41,10 @@ public class initProject {
         connectToDatabase();
         initTables.createTable();
         initTables.addData();
-//        infoProcess.toUpdateStoreData();
-    }
+//        updateProcess.toUpdateClubMembersData();
+
+        deleteProcess.deleteStoreInfo();
+    } 
 
 }
 
