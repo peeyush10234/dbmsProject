@@ -145,7 +145,7 @@ public class addData {
             e.printStackTrace();
         }
 
-        initTables.addTransferData("7000", sourceStoreID, destinationStoreID, oID, quantity, pID);
+        initTables.addTransferData(sourceStoreID, destinationStoreID, oID, quantity, pID);
     }
 
     public static void addReturn(){

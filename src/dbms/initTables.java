@@ -83,7 +83,7 @@ public class initTables {
                     + "FOREIGN KEY (`MembershipLevel`) REFERENCES Memberships(`MembershipLevel`) ON UPDATE CASCADE  ON DELETE SET NULL); ");
 
             initProject.statement.executeUpdate("CREATE TABLE IF NOT EXISTS `Transfer` ("
-                    + "`TransferID` varchar(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,"
+                    + "`TransferID` int PRIMARY KEY NOT NULL AUTO_INCREMENT,"
                     + "`SourceID` varchar(20) NOT NULL, "
                     + "`DestinationID` varchar(20) NOT NULL, "
                     + "`OperatorID` int NOT NULL, "
@@ -511,9 +511,9 @@ public class initTables {
         }
     }
 
-    public static void addTransferData(String TransferID, String SourceID, String DestinationID, int OperatorID,
+    public static void addTransferData(String SourceID, String DestinationID, int OperatorID,
                                        int Quantity, String ProductID){
-        String sqlStatement = "INSERT INTO `Transfer` (`TransferID`, `SourceID`, `DestinationID`,  `OperatorID`, `Quantity`, `ProductID`) "
+        String sqlStatement = "INSERT INTO `Transfer` (`SourceID`, `DestinationID`,  `OperatorID`, `Quantity`, `ProductID`) "
                 + "VALUES (?, ?, ?, ?, ?, ?);";
 
         try{
@@ -521,12 +521,11 @@ public class initTables {
 
             try{
                 PreparedStatement insertDiscountData = initProject.connection.prepareStatement(sqlStatement);
-                insertDiscountData.setString(1, TransferID);
-                insertDiscountData.setString(2, SourceID);
-                insertDiscountData.setString(3, DestinationID);
-                insertDiscountData.setInt(4,OperatorID);
-                insertDiscountData.setInt(5, Quantity);
-                insertDiscountData.setString(6, ProductID);
+                insertDiscountData.setString(1, SourceID);
+                insertDiscountData.setString(2, DestinationID);
+                insertDiscountData.setInt(3,OperatorID);
+                insertDiscountData.setInt(4, Quantity);
+                insertDiscountData.setString(5, ProductID);
 
 
                 insertDiscountData.executeUpdate();

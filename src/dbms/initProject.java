@@ -14,9 +14,9 @@ public class initProject {
 //    public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/ptaneja";
 //    public static final String user = "ptaneja";
 //    public static final String password = "200371037";
-    public static final String jdbcURL = "jdbc:mariadb://localhost:3306/root";
+    public static final String jdbcURL = "jdbc:mariadb://localhost:3306/ptaneja";
     public static final String user = "root";
-    public static final String password = "";
+    public static final String password = "Peeyush@10";
     public static String curr = "Main Menu";
     public static String userInput = "";
     public static boolean quit = false;
@@ -76,7 +76,8 @@ public class initProject {
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello");
         connectToDatabase();
-
+        initTables.createTable();
+        initTables.addData();
         String currMenu  = "Main Menu";
 
         displayMenu.printMenu(currMenu);
