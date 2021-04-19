@@ -78,8 +78,8 @@ public class initProject {
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello");
         connectToDatabase();
-        initTables.createTable();
-        initTables.addData();
+//        initTables.createTable();
+//        initTables.addData();
         String currMenu  = "Main Menu";
 
         displayMenu.printMenu(currMenu);
