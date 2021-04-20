@@ -4,8 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//The displayTables class provides method to display some of the class information
 public class displayTables {
-
+//Method to display ClubMembersInfo
     public static void getClubMembersInfo(){
 
         String sql = "SELECT * FROM `ClubMembers`";
@@ -32,7 +33,7 @@ public class displayTables {
         }
 
     }
-
+    //Method to display DiscountInfo
     public static void getDiscountInfo(){
 
         String sql = "SELECT * FROM `Discount`";
@@ -58,7 +59,7 @@ public class displayTables {
 
     }
 
-
+    //Method to display MembershipLevelInfo
     public static void getMembershipLevelInfo(){
 
         String sql = "SELECT * FROM `Memberships`";
@@ -80,7 +81,7 @@ public class displayTables {
         }
 
     }
-
+    //Method to display SignUpInfo
     public static void getSignUpInfo(){
 
         String sql = "SELECT * FROM `SignUp`";

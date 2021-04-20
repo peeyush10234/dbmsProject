@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//displayResults class is used for providing methods to display entries of commonly used tables in the system
 public class displayResults {
+//    Method to Display all Entries of Store Table
     public static void getStoreInfo(){
 
         String sql = "SELECT * FROM `Store`";
@@ -29,7 +31,7 @@ public class displayResults {
         }
 
     }
-
+    //    Method to Display all Entries of Staff Table
     public static void getStaffInfo() {
 
         String sql = "SELECT * FROM `Staff`";
@@ -60,6 +62,7 @@ public class displayResults {
         }
 
     }
+    //    Method to Display all Entries of Suppliers Table
     public static void getSuppliersInfo(){
 
         String sql = "SELECT * FROM `Supplier`";
@@ -85,7 +88,7 @@ public class displayResults {
     }
 
 
-
+    //    Method to Display all Entries of Merchandise Table
     public static void getMerchandiseInfo(){
 
         String sql = "SELECT * FROM `Merchandise`";
@@ -111,7 +114,7 @@ public class displayResults {
         }
 
     }
-
+    //    Method to Display all Entries of Sells Table
     public static void getSellsInfo(){
 
         String sql = "SELECT * FROM `Sells`";
@@ -134,7 +137,7 @@ public class displayResults {
         }
 
     }
-
+    //    Method to Display all Entries of Supply Table
     public static void getSupplyInfo(){
 
         String sql = "SELECT * FROM `Supply`";
@@ -160,7 +163,7 @@ public class displayResults {
         }
 
     }
-
+    //    Method to Display all Entries of Transaction Table
     public static void getTransactionInfo(){
 
         String sql = "SELECT * FROM `Transaction`";
@@ -186,7 +189,7 @@ public class displayResults {
         }
 
     }
-
+    //    Method to Display all Entries of Orders Table
     public static void getOrdersInfo(){
 
         String sql = "SELECT * FROM `Orders`";
@@ -211,7 +214,7 @@ public class displayResults {
         }
 
     }
-
+    //    Method to Display all Entries of Transfer Table
     public static void getTransferInfo(){
 
         String sql = "SELECT * FROM `Transfer`";
@@ -242,7 +245,7 @@ public class displayResults {
         }
 
     }
-
+    //    Method to Display all Entries of Returns Table
     public static void getReturnsInfo(){
         String sql = "SELECT * FROM `Returns`";
         try {

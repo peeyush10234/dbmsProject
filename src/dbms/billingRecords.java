@@ -3,9 +3,9 @@ package dbms;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+//Class Billing Records provides methods which can be used for billing purposes
 public class billingRecords {
-
+//Method to generate bill for a specific supplier
     public static void generateSupplierBill(String supplierID){
         String sqlStatement = "SELECT SupplierID, SUM(BuyPrice*Quantity) AS Bill FROM Supply WHERE SupplierID = ?;";
 
@@ -28,7 +28,7 @@ public class billingRecords {
             e.printStackTrace();
         }
     }
-
+//Method to generate bill for all suppliers
     public static void generateAllSuppliersBill(){
         String sqlStatement = "SELECT SupplierID, SUM(BuyPrice*Quantity) AS Bill FROM Supply GROUP BY SupplierID;";
 
@@ -50,7 +50,7 @@ public class billingRecords {
             e.printStackTrace();
         }
     }
-
+//Method to generate customer yearly rewards
     public static void generateCustomersYearlyReward(String year){
         String date1 = year + "-01-01";
         String date2 = year + "-12-31";
@@ -78,7 +78,7 @@ public class billingRecords {
             e.printStackTrace();
         }
     }
-
+//Method to generate rewards for platinum customers
     public static void generatePlatinumCustomersYearlyReward(String year){
         String date1 = year + "-01-01";
         String date2 = year + "-12-31";
@@ -107,7 +107,7 @@ public class billingRecords {
             e.printStackTrace();
         }
     }
-
+//Helper method to get product Price
     public static int getProductPrice(String productID, String StoreID){
         String sqlStatement = "SELECT SellPrice FROM Merchandise Where ProductID = ? AND StoreID = ? ;";
         try{
@@ -131,7 +131,7 @@ public class billingRecords {
         }
         return -1;
     }
-
+// Method to getdiscount
     public static Float getDiscount(String productID){
         String sqlStatement = "SELECT Amount FROM Discount where ProductID = ?;";
         try{
@@ -154,7 +154,7 @@ public class billingRecords {
         }
         return -1F;
     }
-
+    //Method to see whether isTransfer Possible
     public static boolean isTransferPossible(String storeID, String productID, int tQuan){
 
         String sqlStatement = "SELECT Quantity FROM Sells Where ProductID = ? AND StoreID = ?;";
@@ -185,7 +185,7 @@ public class billingRecords {
         }
         return false;
     }
-
+//Method to get store Id from TransactionID
     public static String getStoreIDFromTransactionID(String TransactionID){
         String sqlStatement = "SELECT StoreID FROM Transaction WHERE TransactionID = ?;";
         try{

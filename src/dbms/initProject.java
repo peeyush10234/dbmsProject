@@ -14,6 +14,9 @@ public class initProject {
 //    public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/ptaneja";
 //    public static final String user = "ptaneja";
 //    public static final String password = "200371037";
+
+
+//    User Credentials
     public static final String jdbcURL = "jdbc:mariadb://localhost:3310/jsukhad";
     public static final String user = "root";
 
@@ -23,6 +26,7 @@ public class initProject {
     public static String userInput = "";
     public static boolean quit = false;
 
+//    Helper functions to close the connection established with the DB
     static void close(Connection connection) {
         if (connection != null) {
             try {
@@ -50,6 +54,7 @@ public class initProject {
         }
     }
 
+//    Function to connect with the Database
     public static void connectToDatabase() {
         try {
             // Loading the driver. This creates an instance of the driver
@@ -80,12 +85,14 @@ public class initProject {
         connectToDatabase();
         initTables.createTable();
         initTables.addData();
+//        Prints the menu
         String currMenu  = "Main Menu";
 
         displayMenu.printMenu(currMenu);
         Scanner scanner = new Scanner(System.in);
         try {
             while (!quit) {
+//                Different type of menu''s are printed based on the option chosen
                 System.out.println("Enter Required Option");
                 userInput = scanner.nextLine();
                 switch (currMenu) {

@@ -6,14 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import  java.sql.Date;
 import java.sql.PreparedStatement;
+
+
+//UpdateProcess class provides methods to update commonly used tables
 public class updateProcess {
     public static Scanner sc = new Scanner(System.in);
 
-
-
-
-
-    // Operations related to Store Table
+    // Update Operations related to Store Table
     public static void getStoreInfo(String storeID){
 
         String sql = "SELECT * FROM `Store`" + " WHERE StoreID = ?;";
@@ -116,7 +115,7 @@ public class updateProcess {
 
 
 
-    //OPERATIONS RELATED TO STAFF TABLE###########################################
+    // UPDATE OPERATIONS RELATED TO STAFF TABLE###########################################
 
     public static boolean getStaffInfo(String staffID){
 
@@ -272,7 +271,7 @@ public class updateProcess {
 
 
 
-//    OPERATIONS RELATED TO SUPPLIER TABLE #########################################
+//   UPDATE OPERATIONS RELATED TO SUPPLIER TABLE #########################################
 
 
     public static void getSupplierInfo(String SupplierID){
@@ -384,7 +383,7 @@ public class updateProcess {
 
 
 
-//    OPERATIONS RELATED TO MERCHANDISE TABLE #########################################
+//    UPDATE OPERATIONS RELATED TO MERCHANDISE TABLE #########################################
 
 
     public static void getMerchandiseInfo(String ProductID, String StoreID){
@@ -507,7 +506,7 @@ public class updateProcess {
 
 
 
-//    OPERATIONS RELATED TO DISCOUNT TABLE #############################################################
+//    UPDATE OPERATIONS RELATED TO DISCOUNT TABLE #############################################################
 
     public static void getDiscountInfo(String DiscountID){
 
@@ -619,7 +618,7 @@ public class updateProcess {
     }
 
 
-//    OPERATIONS RELATED TO MEMBERSHIPS TABLE ###################################################################
+//   UPDATE OPERATIONS RELATED TO MEMBERSHIPS TABLE ###################################################################
 
     public static void getMembershipInfo(String MerbershipLevel){
 
@@ -706,7 +705,7 @@ public class updateProcess {
 
 
 
-//    OPERATIONS RELATED TO SUPPLY TABLE #########################################################
+//   UPDATE OPERATIONS RELATED TO SUPPLY TABLE #########################################################
 
 
     public static void getSupplyInfo(String SupplyID){
@@ -829,7 +828,7 @@ public class updateProcess {
 
 
 
-//    OPERATIONS RELATED TO SELLS TABLE
+//  UPDATE OPERATIONS RELATED TO SELLS TABLE
 
     public static void getSellInfo(String StoreID, String ProductID){
 
@@ -921,7 +920,7 @@ public class updateProcess {
 
 
 
-//OPERATIONS RELATED TO CLUBMEMBERS TABLE ##############################################
+//UPDATE OPERATIONS RELATED TO CLUBMEMBERS TABLE ##############################################
 
 
 
@@ -1060,7 +1059,7 @@ public class updateProcess {
         }
 
     }
-
+    //UPDATE OPERATIONS RELATED TO TRANSFER TABLE ##############################################
     public static void updateTransfer(String productID, String sourceStoreID, String destStoreID, int quantity){
         try{
             initProject.connection.setAutoCommit(false);
@@ -1095,7 +1094,7 @@ public class updateProcess {
                 e.printStackTrace();
         }
     }
-
+    //UPDATE OPERATIONS RELATED TO ORDERS TABLE ##############################################
     public static void updateOrders(String TransactionID, String ProductID, int quantity, Float Discount){
         try{
             initProject.connection.setAutoCommit(false);
@@ -1122,7 +1121,7 @@ public class updateProcess {
             e1.printStackTrace();
         }
     }
-
+    //UPDATE OPERATIONS RELATED TO SELLS TABLE ##############################################
     public static void updateSells(String ProductID, String StoreID, int quantity){
         try{
             initProject.connection.setAutoCommit(false);

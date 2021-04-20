@@ -1,5 +1,5 @@
 package dbms;
-
+//Class Display Menu provides helper function to print the sub-menu
 public class displayMenu {
     public static void printMenu(String menu){
         System.out.println(menu);

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+//The initTables class is Used for all initial table initializations and dummy data loading
 public class initTables {
     public static void createTable() throws SQLException {
         initProject.connection.setAutoCommit(false);
@@ -154,7 +155,7 @@ public class initTables {
             initProject.connection.setAutoCommit(true);
         }
     }
-
+//Helper function to add Store Data
     public static  void addStoreData(String StoreID, int ManagerID, String StoreAddress, String PhoneNo){
         String sqlStatement = "INSERT INTO `Store` (`StoreID`, `ManagerID`, `StoreAddress`, `PhoneNo`) "
                 + "VALUES (?, ?, ?, ?);";
@@ -181,7 +182,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper Function to add Staff Data
     public static void addStaffData(int  StaffID, String StoreID, String Name, int Age, String HomeAddress,
                                     String JobTitle, String Phone, String Email, String TimeOfEmployment){
         String sqlStatement = "INSERT INTO `Staff` (`StaffID`, `StoreID`, `Name`, `Age`, `HomeAddress`, `JobTitle`, `Phone`, `Email`, `TimeOfEmployment`) "
@@ -215,7 +216,7 @@ public class initTables {
         }
 
     }
-
+//Helper Function to add Supplier Data
     public static  void addSupplierData(String SupplierID, String Name, String PhoneNo, String EmailAddress, String Location){
         String sqlStatement = "INSERT INTO `Supplier` (`SupplierID`, `Name`, `PhoneNo`, `EmailAddress`, `Location`) "
                 + "VALUES (?, ?, ?, ?, ?);";
@@ -245,7 +246,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add Data in Memberships Table
     public static void addMembershipsData(String MembershipLevel, Float Reward){
         String sqlStatement = "INSERT INTO `Memberships` (`MembershipLevel`, `Reward`)"
                 + "VALUES (?, ?);";
@@ -268,7 +269,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add data in table clubmembers
     public static void addClubMemberData(String CustomerID, String FirstName,  String LastName, String MembershipLevel,
                                          String PhoneNo, String ActiveStatus,   String Email, String Address){
         String sqlStatement = "INSERT INTO `ClubMembers` (`CustomerID`, `FirstName`, `LastName`, `MembershipLevel`, `PhoneNo`, `ActiveStatus`, `Email`, `Address`) "
@@ -301,7 +302,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add data in Merchandise table
     public static void addMerchandiseData(String ProductID, String StoreID, String ProductName,
                                           int SellPrice, String ProductionDate, String ExpirationDate){
         String sqlStatement = "INSERT INTO `Merchandise` (`ProductID`, `StoreID`, `ProductName`, `SellPrice`, `ProductionDate`, `ExpirationDate`) "
@@ -332,7 +333,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add Data in Sells table
     public static void addSellsData(String ProductID, String StoreID, int Quantity){
         String sqlStatement = "INSERT INTO `Sells` (`ProductID`, `StoreID`, `Quantity`) "
                 + "VALUES (?, ?, ?);";
@@ -359,7 +360,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add Supply Data
     public static void addSupplyData(String ProductID, String StoreID, String SupplierID, int BuyPrice,
                                           int Quantity){
         String sqlStatement = "INSERT INTO `Supply` (`SupplierID`, `ProductID`, `StoreID`,  `BuyPrice`, `Quantity`) "
@@ -389,7 +390,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add Data in SignUp table
     public static void addSignUpData(String StoreID, int StaffID, String CustomerID, String SignUpDate){
         String sqlStatement = "INSERT INTO `SignUp` (`StoreID`, `StaffID`, `CustomerID`,  `SignUpDate`) "
                 + "VALUES (?, ?, ?, ?);";
@@ -417,7 +418,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add data in Transaction Table
     public static void addTransactionData(String TransactionID, String StoreID, String CustomerID, int CashierID,
                                           String PurchaseDate){
         String sqlStatement = "INSERT INTO `Transaction` (`TransactionID`, `StoreID`, `CustomerID`,  `CashierID`, `PurchaseDate`) "
@@ -447,7 +448,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add Data in orders table
     public static void addOrdersData(String TransactionID, String ProductID, int Price, int Quantity, Float TotalPrice){
         String sqlStatement = "INSERT INTO `Orders` (`TransactionID`, `ProductID`, `Price`,  `Quantity`, `TotalPrice`) "
                 + "VALUES (?, ?, ?, ?, ?);";
@@ -476,7 +477,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add Data in Discount Table
     public static void addDiscountData(String DiscountID, String ProductID, Float Amount, String StartDate,
                                           String EndDate){
         String sqlStatement = "INSERT INTO `Discount` (`DiscountID`, `ProductID`, `Amount`,  `StartDate`, `EndDate`) "
@@ -506,11 +507,11 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+//Helper function to add data in Transfer Table
     public static void addTransferData(String SourceID, String DestinationID, int OperatorID,
                                        int Quantity, String ProductID){
         String sqlStatement = "INSERT INTO `Transfer` (`SourceID`, `DestinationID`,  `OperatorID`, `Quantity`, `ProductID`) "
-                + "VALUES (?, ?, ?, ?, ?, ?);";
+                + "VALUES (?, ?, ?, ?, ?);";
 
         try{
             initProject.connection.setAutoCommit(false);
@@ -537,7 +538,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+    //Helper function to add data in Returns Table
     public static void addReturnsData(String TransactionID, String ProductID,int Quantity){
         String sqlStatement = "INSERT INTO `Returns` (`TransactionID`,  `ProductID`, `Quantity`) "
                 + "VALUES (?, ?, ?);";
@@ -565,7 +566,7 @@ public class initTables {
             throwables.printStackTrace();
         }
     }
-
+    //Helper function to add data in Inventory Table
     public static void addInventoryDetails(String ProductID, String StoreID, String ProductName, int Quantity,
                                            int BuyPrice, int SellPrice, String ProductionDate, String ExpirationDate,
                                            String SupplierID){
@@ -579,6 +580,7 @@ public class initTables {
         }
 
     }
+//    Loading of Dummy data
     public static void addData(){
         addStoreData("2001", 1001, "2221, B Street, NC", "919-2222-123");
         addStoreData("2002", 1002, "2222, C Street, NC", "919-2222-456");

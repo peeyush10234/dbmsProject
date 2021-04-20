@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+//The class deleteProcess provides methods to delete entries in particular tables
 public class deleteProcess {
     public static Scanner sc = new Scanner(System.in);
 

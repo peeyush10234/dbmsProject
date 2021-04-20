@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//Class addData provides methods to add data to particular tables
 public class addData {
-
+//method to add data in Transaction Table
     public static void addTransaction(){
 
         Scanner sc = new Scanner(System.in);
@@ -71,7 +72,7 @@ public class addData {
         }
 
     }
-
+    //method to add data in Inventory Table
     public static void addInventory(){
 
         System.out.println("Enter ProductID");
@@ -112,7 +113,7 @@ public class addData {
 
         initTables.addInventoryDetails(pID, sID, pName, quantity, buyPrice, sellPrice, productionDate, expirationDate, supplierID);
     }
-
+    //method to add data in Transfers Table
     public static void addTransfers(){
         System.out.println("Enter the source StoreID");
         Scanner sc = new Scanner(System.in);
@@ -147,7 +148,7 @@ public class addData {
 
         initTables.addTransferData(sourceStoreID, destinationStoreID, oID, quantity, pID);
     }
-
+    //method to add data in Return Table
     public static void addReturn(){
 
         System.out.println("Enter Transaction ID");
@@ -189,7 +190,7 @@ public class addData {
         }
     }
 
-
+    //method to add data in Supply Table
     public static void addSupply(){
 
         System.out.println("Enter ProductID");
@@ -215,7 +216,7 @@ public class addData {
 
     }
 
-
+    //method to add data in Store Table
     public static void addStore(){
         System.out.println("Enter StoreID");
         Scanner sc = new Scanner(System.in);
@@ -236,7 +237,7 @@ public class addData {
 
         initTables.addStoreData(sID, mID, sADD, Phoneno);
     }
-
+    //method to add data in Staff Table
     public static void addStaff(){
         System.out.println("Enter StaffID");
         Scanner sc = new Scanner(System.in);
@@ -278,7 +279,7 @@ public class addData {
 
         initTables.addStaffData(StaffID,StoreID,Name,Age,HomeAddress,JobTitle,Phone,Email,TimeOfEmployment);
     }
-
+    //method to add data in Supplier Table
     public static void addSupplier(){
         System.out.println("Enter SupplierID");
         Scanner sc = new Scanner(System.in);
@@ -302,7 +303,7 @@ public class addData {
 
         initTables.addSupplierData(SupplierID, Name, PhoneNo, EmailAddress, Location);
     }
-
+    //method to add data in ClubMember Table
     public static void addClubMember(){
         System.out.println("Enter CustomorID");
         Scanner sc = new Scanner(System.in);
@@ -339,7 +340,7 @@ public class addData {
         initTables.addClubMemberData(cID, fname, lname, mlevel, Phoneno, activeStatus, email, address);
 
     }
-
+    //method to add data in Discount Table
     public static void addDiscount(){
         System.out.println("Enter DiscountId");
         Scanner sc = new Scanner(System.in);
@@ -364,7 +365,7 @@ public class addData {
         initTables.addDiscountData(dID, pID, amount, sDate, eDate);
     }
 
-
+    //method to add data in Memberships Table
     public static void addMemberships(){
         System.out.println("Enter MembershipLevel");
         Scanner sc = new Scanner(System.in);
@@ -376,7 +377,7 @@ public class addData {
 
         initTables.addMembershipsData(mlevel, reward);
     }
-
+    //method to add data in SignUp Table
     public static void addSignUp(){
         System.out.println("Enter StoreID");
         Scanner sc = new Scanner(System.in);

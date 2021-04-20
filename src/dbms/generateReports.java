@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class generateReports {
-
+//Operation related to Yearly Sales Report
     public static void totalSalesReportYearly(String Year){
         String sqlStatement = "SELECT SUM(o.TotalPrice) AS TotalSales FROM Orders o, Transaction t "
                     + "WHERE o.TransactionID = t.TransactionID AND YEAR(t.PurchaseDate) = ?;";
@@ -23,7 +23,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Total Sales Report For a day
     public static void totalSalesReportDay(String date){
         String sqlStatement = "SELECT SUM(o.TotalPrice) AS TotalSales FROM Orders o, Transaction t "
                 + "WHERE o.TransactionID = t.TransactionID AND t.PurchaseDate = ?;";
@@ -41,7 +41,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Monthly Sales Report
     public static void totalSalesReportMonthly(String year, String month){
         String sqlStatement = "SELECT SUM(o.TotalPrice) AS TotalSales FROM Orders o, Transaction t "
                 + "WHERE o.TransactionID = t.TransactionID AND YEAR(t.PurchaseDate) = ? AND MONTH(t.PurchaseDate) = ?;";
@@ -60,7 +60,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Store Sales Report Between Dates
     public static void storeSalesReportPeriod(String date1, String date2, String StoreID){
         String sqlStatement = "SELECT StoreID, SUM(o.TotalPrice) AS TotalSales FROM Orders o, Transaction t "
                 + "WHERE o.TransactionID = t.TransactionID AND t.StoreID = ? AND t.PurchaseDate BETWEEN ? AND ?;";
@@ -80,7 +80,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Yearly Store Sales Report
     public static void storeSalesYearly(String Year, String StoreID){
         String sqlStatement = "SELECT t.StoreID, SUM(o.TotalPrice) AS TotalSales FROM Orders o, Transaction t "
                 + "WHERE o.TransactionID = t.TransactionID AND YEAR(t.PurchaseDate) = ? AND t.StoreID = ?;";
@@ -99,7 +99,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Monthly Store Sales Report
     public static void storeSalesReportMonthly(String year, String month, String StoreID){
         String sqlStatement = "SELECT StoreID, SUM(o.TotalPrice) AS TotalSales FROM Orders o, Transaction t "
                 + "WHERE o.TransactionID = t.TransactionID AND YEAR(t.PurchaseDate) = ? AND MONTH(t.PurchaseDate) = ? AND t.StoreID = ?;";
@@ -119,7 +119,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Merchandise Report for a specific Product
     public static void merchandiseReportProduct(String productID){
         String sqlStatement = "SELECT StoreID,  ProductID, SUM(Quantity) as TotalStock FROM Sells " +
                 "WHERE ProductID = ? GROUP BY StoreID;";
@@ -137,7 +137,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to All Merchandise Report
     public static void merchandiseReport(){
         String sqlStatement = "SELECT StoreID,  ProductID, SUM(Quantity) as TotalStock FROM Sells " +
                 " GROUP BY StoreID, ProductID";
@@ -154,7 +154,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Get Customers Growth Report For a given period
     public static void getCustomerReportPeriod(String date1, String date2){
         String sqlStatement = "SELECT Count(CustomerID) AS CustomerGrowth FROM SignUp Where date(SignUpDate) between ? AND ?;";
         try{
@@ -171,7 +171,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Get Customers Yearly Growth Report
     public static void getCustomerReportYearly(String year){
         String sqlStatement = "SELECT Count(CustomerID) AS CustomerGrowth FROM SignUp Where YEAR(SignUpDate)  = ?;";
         try{
@@ -187,7 +187,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Get Customers Monthly Growth Report
     public static void getCustomerReportMonthly(String year, String month){
         String sqlStatement = "SELECT Count(CustomerID) AS CustomerGrowth FROM SignUp Where YEAR(SignUpDate)  = ? AND MONTH(SignUpDate) = ?;";
         try{
@@ -204,7 +204,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Get All Customer Purchase History for a given period
     public static void getPurchaseReportPeriod(String date1, String date2){
         String sqlStatement = "SELECT t.CustomerID, SUM(o.totalPrice) AS TotalPurchase FROM Orders o, Transaction t WHERE o.TransactionID = t.TransactionID AND t.PurchaseDate BETWEEN  ? AND ? GROUP BY t.CustomerID;";
         try{
@@ -226,7 +226,7 @@ public class generateReports {
             e.printStackTrace();
         }
     }
-
+    //Operation related to Get Purchase History for a specific Customer for a given period
     public static void getCustomerPurchaseReportPeriod(String CustomerID, String date1, String date2){
         String sqlStatement = "SELECT t.CustomerID, SUM(o.totalPrice) AS TotalPurchase FROM Orders o, Transaction t WHERE o.TransactionID = t.TransactionID AND t.PurchaseDate BETWEEN  ? AND ? AND t.CustomerID = ?;";
         try{
